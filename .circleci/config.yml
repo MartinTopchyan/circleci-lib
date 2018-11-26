@@ -6,6 +6,7 @@ jobs:
     steps:
       - checkout
       - run: mvn clean install
+      - run: mvn clean deploy
 #      - run: cd ..
 #      - run: git clone https://github.com/MartinTopchyan/circleci-demo.git
 #      - run: cd circleci-demo
