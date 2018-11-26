@@ -1,0 +1,12 @@
+version: 2
+jobs:
+  build:
+    machine: true
+#         working_directory: ~/projects
+    steps:
+      - checkout
+      - run: mvn clean install
+#      - run: cd ..
+#      - run: git clone https://github.com/MartinTopchyan/circleci-demo.git
+#      - run: cd circleci-demo
+#      - run: mvn package
