@@ -3,10 +3,19 @@ jobs:
   build:
     machine: true
 #         working_directory: ~/projects
-    steps:
-      - checkout
-      - run: mvn clean install
-      - run: mvn clean deploy
+  dependencies:
+    override:
+      - mvn  clean install dependency:resolve-plugins dependency:go-offline
+
+  test:
+    override:
+      - mvn -o surefire:test
+
+  deployment:
+    main:
+      branch: master
+      commands:
+        - mvn -s .circleci.settings.xml  deploy
 #      - run: cd ..
 #      - run: git clone https://github.com/MartinTopchyan/circleci-demo.git
 #      - run: cd circleci-demo
