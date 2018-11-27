@@ -3,6 +3,9 @@ jobs:
   build:
     machine: true
 #         working_directory: ~/projects
+    steps:
+      - checkout
+      - run: mvn clean package
   dependencies:
     machine: true
     steps:
