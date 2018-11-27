@@ -31,6 +31,14 @@ workflows:
   workflow:
     jobs:
     - build
-    - dependencies
-    - test
-    - deployment
+    - dependencies:
+        requires:
+          - build
+
+    - test:
+        requires:
+          - build
+    - deployment:
+        requires:
+          - dependencies
+          - test
