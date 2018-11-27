@@ -6,19 +6,19 @@ jobs:
   dependencies:
     machine: true
       override:
-        - mvn  clean install dependency:resolve-plugins dependency:go-offline
+          - mvn  clean install dependency:resolve-plugins dependency:go-offline
 
   test:
     machine: true
       override:
-        - mvn -o surefire:test
+          - mvn -o surefire:test
 
   deployment:
     machine: true
       main:
         commands:
-          - mvn -s .circleci.settings.xml  deploy
-          - mvn -Pwaisely clean deploy
+            - mvn -s .circleci.settings.xml  deploy
+            - mvn -Pwaisely clean deploy
 #      - run: cd ..
 #      - run: git clone https://github.com/MartinTopchyan/circleci-demo.git
 #      - run: cd circleci-demo
