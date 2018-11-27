@@ -8,11 +8,8 @@ jobs:
       - run: mvn clean package
   dependencies:
     machine: true
-    steps:
-      - checkout
-      - run:
-          override:
-            - mvn  clean install dependency:resolve-plugins dependency:go-offline
+    override:
+        - mvn  clean install dependency:resolve-plugins dependency:go-offline
 
   test:
     machine: true
