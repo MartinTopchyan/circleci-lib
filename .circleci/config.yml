@@ -3,9 +3,9 @@ jobs:
   build:
     machine: true
 #         working_directory: ~/projects
-  dependencies:
-    override:
-      - mvn  clean install dependency:resolve-plugins dependency:go-offline
+    dependencies:
+      override:
+        - mvn  clean install dependency:resolve-plugins dependency:go-offline
 
   test:
     override:
