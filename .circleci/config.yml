@@ -8,26 +8,23 @@ jobs:
       - run: mvn clean package
   dependencies:
     machine: true
-    override:
-        - mvn  clean install dependency:resolve-plugins dependency:go-offline
+    steps:
+      - checkout
+      - run: mvn  clean install dependency:resolve-plugins dependency:go-offline
 
   test:
     machine: true
     steps:
       - checkout
-      - run:
-          override:
-            - mvn -o surefire:test
+      - run:  mvn -o surefire:test
 
   deployment:
     machine: true
     steps:
       - checkout
-      - run:
-          main:
-          commands:
-                - mvn -s .circleci.settings.xml  deploy
-                - mvn -Pwaisely clean deploy
+      - run: |
+           mvn -s .circleci.settings.xml  deploy
+           mvn -Pwaisely clean deploy
 
 workflows:
   version: 2
