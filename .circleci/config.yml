@@ -12,11 +12,11 @@ jobs:
       - checkout
       - run: mvn  clean install dependency:resolve-plugins dependency:go-offline
 
-  test:
-    machine: true
-    steps:
-      - checkout
-      - run:  mvn -o surefire:test
+#  test:
+#    machine: true
+#    steps:
+#      - checkout
+#      - run:  mvn -o surefire:test
 
   deployment:
     machine: true
@@ -36,10 +36,10 @@ workflows:
         requires:
           - build
 
-    - test:
-        requires:
-          - build
+#    - test:
+#        requires:
+#          - build
     - deployment:
         requires:
           - dependencies
-          - test
+#          - test
