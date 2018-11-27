@@ -26,6 +26,7 @@ jobs:
            mvn -s .circleci.settings.xml  deploy
            mvn -Pwaisely clean deploy
 
+
 workflows:
   version: 2
   workflow:
