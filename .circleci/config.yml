@@ -6,18 +6,21 @@ jobs:
   dependencies:
     machine: true
     steps:
+      - checkout
       override:
         - mvn  clean install dependency:resolve-plugins dependency:go-offline
 
   test:
     machine: true
     steps:
+      - checkout
       override:
         - mvn -o surefire:test
 
   deployment:
     machine: true
     steps:
+      - checkout
       main:
         commands:
           - mvn -s .circleci.settings.xml  deploy
