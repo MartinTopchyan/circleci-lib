@@ -41,7 +41,8 @@ jobs:
       - image: circleci/openjdk:8-jdk
     steps:
       - checkout
-      - run: apt-get -y -qq install awscli
+      - run: pip install awscli --upgrade --user
+#  apt-get -y -qq install awscli
 #      - run: |
 #           mvn -Pwaisely -s .circleci/settings.xml clean deploy -DskipTests
 
