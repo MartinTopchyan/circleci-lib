@@ -41,10 +41,11 @@ jobs:
       - image: circleci/openjdk:8-jdk
     steps:
       - checkout
+      - run: apt-get -y -qq install awscli
 #      - run: |
 #           mvn -Pwaisely -s .circleci/settings.xml clean deploy -DskipTests
 
-      - run: mvn -Pwaisely clean deploy -DaltDeploymentRepository=repo.com.waisely::default::s3://repo.com.waisely/snapshot
+      - run: mvn  clean deploy -DaltDeploymentRepository=repo.com.waisely::default::s3://repo.com.waisely/snapshot
 
 
 workflows:
