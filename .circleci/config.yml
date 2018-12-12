@@ -1,16 +1,34 @@
 version: 2
 jobs:
   build:
-    machine: true
-#         working_directory: ~/projects
+    working_directory: ~/circleci-lib-demo
+    docker:
+      - image: circleci/openjdk:8-jdk
+
     steps:
       - checkout
-      - run: mvn clean package
-  dependencies:
-    machine: true
+
+      - restore_cache:
+                key: spreading-lib-{{ checksum "pom.xml" }}
+
+            - run: mvn dependency:go-offline
+
+            - save_cache:
+                paths:
+                - ~/.m2
+                key: spreading-lib-{{ checksum "pom.xml" }}
+
+      - run: mvn clean package -DskipTests
+  test:
+    working_directory: ~/circleci-lib-demo
+
+    docker:
+      - image: circleci/openjdk:8-jdk
+
     steps:
       - checkout
-      - run: mvn  clean install dependency:resolve-plugins dependency:go-offline
+      - run: mvn clean  install
+
 #  test:
 #    machine: true
 #    steps:
@@ -18,11 +36,13 @@ jobs:
 #      - run:  mvn -o surefire:test
 
   deployment:
-    machine: true
+    working_directory: ~/circleci-lib-demo
+    docker:
+      - image: circleci/openjdk:8-jdk
     steps:
       - checkout
       - run: |
-           mvn -Pwaisely -s .circleci/settings.xml  deploy
+           mvn -s .circleci/settings.xml  deploy
            mvn -Pwaisely clean deploy
 
 
@@ -31,10 +51,9 @@ workflows:
   workflow:
     jobs:
     - build
-    - dependencies:
+    - test:
         requires:
           - build
-
 #    - test:
 #        requires:
 #          - build
