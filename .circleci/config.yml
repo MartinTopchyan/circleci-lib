@@ -41,9 +41,10 @@ jobs:
       - image: circleci/openjdk:8-jdk
     steps:
       - checkout
-      - run: |
-           mvn -s .circleci/settings.xml  deploy
-           mvn -Pwaisely clean deploy
+#      - run: |
+#           mvn -Pwaisely -s .circleci/settings.xml clean deploy -DskipTests
+
+      - run: mvn -Pwaisely clean deploy -DaltDeploymentRepository=repo.com.waisely::default::s3://repo.com.waisely/snapshot
 
 
 workflows:

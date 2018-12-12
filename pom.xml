@@ -39,14 +39,14 @@
     <profile>
       <id>waisely</id>
       <distributionManagement>
-        <snapshotRepository>
-          <id>repo.com.waisely</id>
-          <url>s3://repo.com.waisely/snapshot</url>
-        </snapshotRepository>
         <repository>
           <id>repo.com.waisely</id>
           <url>s3://repo.com.waisely/release</url>
         </repository>
+        <snapshotRepository>
+          <id>repo.com.waisely</id>
+          <url>s3://repo.com.waisely/snapshot</url>
+        </snapshotRepository>
       </distributionManagement>
       <repositories>
         <repository>
