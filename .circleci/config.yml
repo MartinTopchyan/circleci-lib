@@ -34,15 +34,19 @@ jobs:
 #    steps:
 #      - checkout
 #      - run:  mvn -o surefire:test
-
+  dependencies:
+    working_directory: ~/circleci-lib-demo
+    docker:
+      - image: circleci/openjdk:8-jdk
+    steps:
+      - checkout
+      - run: apt-get -y -qq install awscli
   deployment:
     working_directory: ~/circleci-lib-demo
     docker:
       - image: circleci/openjdk:8-jdk
     steps:
       - checkout
-      - run: pip install awscli --upgrade --user
-#  apt-get -y -qq install awscli
 #      - run: |
 #           mvn -Pwaisely -s .circleci/settings.xml clean deploy -DskipTests
 
@@ -57,10 +61,11 @@ workflows:
     - test:
         requires:
           - build
+    - dependencies
 #    - test:
 #        requires:
 #          - build
     - deployment:
         requires:
           - test
-#          - test
+          - dependencies
