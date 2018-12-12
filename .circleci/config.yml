@@ -9,14 +9,14 @@ jobs:
       - checkout
 
       - restore_cache:
-                key: spreading-lib-{{ checksum "pom.xml" }}
+          key: spreading-lib-{{ checksum "pom.xml" }}
 
-            - run: mvn dependency:go-offline
+      - run: mvn dependency:go-offline
 
-            - save_cache:
-                paths:
-                - ~/.m2
-                key: spreading-lib-{{ checksum "pom.xml" }}
+      - save_cache:
+          paths:
+          - ~/.m2
+          key: spreading-lib-{{ checksum "pom.xml" }}
 
       - run: mvn clean package -DskipTests
   test:
@@ -59,5 +59,5 @@ workflows:
 #          - build
     - deployment:
         requires:
-          - dependencies
+          - test
 #          - test
