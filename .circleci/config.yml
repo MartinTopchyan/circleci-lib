@@ -40,7 +40,7 @@ jobs:
       - image: circleci/openjdk:8-jdk
     steps:
       - checkout
-      - run: apt-get -y -qq install awscli
+      - run: sudo apt-get -y -qq install awscli
   deployment:
     working_directory: ~/circleci-lib-demo
     docker:
