@@ -1,0 +1,21 @@
+pipeline {
+    agent any
+    stages {
+        stage('---clean---') {
+            steps {
+              //  sh "git clone https://github.com/MartinTopchyan/circleci-lib.git"
+                sh "mvn clean install -DskipTests -f circleci-lib"
+            }
+        }
+        stage('--test--') {
+            steps {
+                sh "mvn test  -f circleci-lib "
+            }
+        }
+        stage('--package--') {
+            steps {
+                sh "mvn clean package -DskipTests -f circleci-lib "
+            }
+        }
+    }
+}
