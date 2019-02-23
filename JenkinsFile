@@ -4,17 +4,17 @@ pipeline {
         stage('---clean---') {
             steps {
               //  sh "git clone https://github.com/MartinTopchyan/circleci-lib.git"
-                sh "mvn clean install -DskipTests -f circleci-lib"
+                sh "mvn clean install -DskipTests"
             }
         }
         stage('--test--') {
             steps {
-                sh "mvn test  -f circleci-lib "
+                sh "mvn test  "
             }
         }
         stage('--package--') {
             steps {
-                sh "mvn clean package -DskipTests -f circleci-lib "
+                sh "mvn clean package -DskipTests  "
             }
         }
     }
